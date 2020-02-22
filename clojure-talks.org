@@ -1,0 +1,410 @@
+* How I created my own Clojure job – Valtteri Harmainen
+https://www.youtube.com/watch?v=mfdX_Qlsxk8&list=PLetHPRQvX4a-c3KDRTxxwGRmEMutL8Apf&index=13
+https://github.com/lipas-liikuntapaikat/lipas
+* Halalbooking.com
+https://www.youtube.com/watch?v=jVIIDGpw9eA&list=PLetHPRQvX4a-c3KDRTxxwGRmEMutL8Apf&index=17
+* Clj-Kondo
+* CRUX database
+* Generative Art
+  https://www.youtube.com/watch?v=TeXCvh5X5w0&list=PLetHPRQvX4a-c3KDRTxxwGRmEMutL8Apf&index=18
+* Where to Start?
+  https://www.youtube.com/watch?v=sT8LIdfH4ak&list=PL_arKaS8JOXHgSDJXtAVxhtDBJ6WL3uaS&index=19
+  
+  Metabase is the example ~98Kloc
+  
+  
+** Don't panic
+   - REPL early and often
+** REPL unfriendliness
+   - (defmulti)
+   - (def f (fn [] )
+   - (defmacros)
+** Tackling deep pipelines
+   - deal with stateless code
+   - draw graph of namespaces (simon-katz/lein-nomis-ns-graph)
+   - look at tests
+   - Tap> from Onyx 
+** Notbooks
+   - https://github.com/clojupyter/clojupyter
+   - https://github.com/JonyEpsilon/gorilla-repl
+   - https://github.com/viebel/klipse
+** Good functions - single responsibility
+** Good structure
+** Test Scaffolding and utils should be designed to be carefully as rest of code as they are used very often
+** Coding style
+   http:/github.com/bbatsov/clojure-style-guide
+** Use linter and write custom if needed
+** Have good onboarding plan for future clojurists
+* Composing Applications 
+This lightning talk gives an explanation of how Rafal and his team achieved something similar to "Wordpress/Drupal plugins" and inversion of control in Clojure for Braid, an open-source clojure chat app.
+
+https://www.youtube.com/watch?v=7HpI7d3-hpo&list=PL_arKaS8JOXHgSDJXtAVxhtDBJ6WL3uaS&index=25
+http://github.com/braidchat/braid  - Chat server/client in clojure
+
+- Server (http, events, db)
+- Client(reframe)  views, subs, events 
+
+But, features spanning across everything
+
+so features and/or layers decomposition
+
+Hosts expose extension points
+Plugins implement extension points by extending hosts
+
+** Requirements
+   - Host should not know which plugins extend it
+   - It should be clear in host code what is extendable and how?
+   - it should be clear in plugins what is being extended
+   - must be able to support multiple extensions per extension point
+   - must be able to extend server-sde and client-side
+   - Should be able to still do hot-code-reloading on client and server
+   - PLugins can also expose their own extension points
+** Related
+   OSGI????????
+   inversion of control
+   feature flags
+   expression problem?
+   aspects?
+** result?
+   core
+     api
+     hooks
+     modules
+   stars
+     core
+   search
+      core
+      ui
+      helpers
+
+     #+begin_src clojure
+     (defn init! []
+       (hooks/reset-all!)
+       (braid/stars.core/init!))
+     #+end_src
+   
+
+
+* Solving problems the clojure way
+  https://www.youtube.com/watch?v=vK1DazRK_a0&list=PL_arKaS8JOXHgSDJXtAVxhtDBJ6WL3uaS&index=22
+
+  Clojure in 2019 is
+
+  - functional
+  - data-driven
+
+** 
+* Crux : The crux of Bi-temporality
+* Distributed Computing in clojure and Spark
+* Growing a chatops platform and having fun with clojure
+* Arcadia : Fn and Games with Arcadia
+* Raising Services and People with Clojure
+  Stack:
+
+  - Aleph
+  - Reitit + Ring = add per-route middleware (compared with compojure)
+  - Mount
+  - Faraday
+  - Cljstache
+  - Vue.js
+
+Tools:
+
+- Teltype
+- PartyREPL
+
+Practices:
+- All data makes it easy to moack for tests; don't use REPL for testing
+- Pure functions are pure joy
+  - Compact
+  - Resaonable
+  - Fits into the brain
+
+** Test mocking  with-redefs
+#+begin_src clojure
+(deftest abc-test
+  (testing "return success"
+    (with-redefs [cde (constantly {:stored-value "aaa"})]
+      (is (= "success" (abc "aaa"))))))
+#+end_src
+
+**  
+* Reitit, The Ancient Art of Routing
+* How is Keechma Different
+  https://www.youtube.com/watch?v=yEAt4Y0VUlg&list=PL_arKaS8JOXHgSDJXtAVxhtDBJ6WL3uaS&index=17
+  https://github.com/keechma/keechma
+
+  built for reagent ; good for agency work
+** How is it same?
+   - based on reagent
+   - Uni directional
+** Different?
+   - no globals
+     Apps kep their state internally
+     Apps are reified and can be started/stoped
+     Multiple apps can be started
+** Route centric framework
+
+   /?page=article&action=edit&id=1
+
+   routes triggers controllers
+   (url->map) (map->url)
+   When url changes 
+** Controllers
+   - Powered by route change
+   - Have a strict life-cycle
+   - Have full access to the state atom
+   - Respond to commands
+   - Bridge framework with your domain code
+
+   - 
+** Controller lifecycle
+   - prev value / new value / stop / start / final state
+     #+begin_src clojre
+     (defmethod controller/params Controller [this route-params]
+       (get-in route-params)
+     #+end_src
+** Controller (Commands * Events)
+   - small number of commands
+   - Commands are sent on a topic to the **specific** controler. one command trigger to one
+** Architecture
+   router -> Front Controller (manger) -> controller 1; controller 2 
+* Appsflyer : Lessons in Building a System that Processes More than 70 Billion Events Daily
+
+https://www.youtube.com/watch?v=VBIlk3GMmNc&list=PL_arKaS8JOXHgSDJXtAVxhtDBJ6WL3uaS&index=16
+
+AppsFlyer’s mobile attribution and analysis platform is used by the biggest and most popular applications on Earth, generating a constant “storm” of 70B+ events (HTTP Requests) on their microservices, cloud based platform daily. In this talk, Morri will share their technological choices which include Clojure as their leading backend language - and the decisions to migrate from Python for improved multi-threading and concurrency.
+
+The backend was to built to be a robust system based on a diversity of open source tooling such as: Kafka, RabbitMQ, Aerospike, Redis and a host of proprietary in-house developed tools and services that enable the testing and adoption of new data technologies, continuous deployment, and large-scale monitoring of the system - including open sourcing production libraries for interoperability with core technologies.
+
+This talk will also dive into AppFlyer's real-time back-end architecture & functional programming philosophy, what it is like to be a developer at AppsFlyer, and overall attitude towards performance, redundancy and resiliency for processing 35 Million events/minute at an average latency of hundreds of milliseconds per event.
+
+** Mobile/Web hybrid Attribution and analysis
+** Tech Stack
+   2 -person team
+
+   - Python
+   - Redis
+   - MongoDb (
+   - CouchDB (master database)
+
+  over time
+
+  - Clojure (primary language)  principles of language permeated to architecture; Language of the system Rich
+  - Kafka
+  - Docker, Consul, Spark
+  - Google BigQuery
+  - Aerospike
+  - Druid
+  - Go
+  - ClickHouse
+** prefernce for clustered masterless technologies
+   - Kafa, aerospike, clickhouse
+** System Architecture; 
+   Mainly a data platform with few microservices (attribution, user, postbacks, push) than a SOA
+   Mobile phones hitting web servers. webservers puts into kafka
+   - Microservices  pulls from kafka
+     - Attribution Engine + Aerospike
+     - User Activity + Aerospike
+     - Postbacks to Partners
+     - Push API to Clients
+     - Batch Analytics + Druid + ClickHouse
+   - Also S3 for retention beyond kafka
+** Architecture Patterns
+   - Event Driven Architecture and also a mini-CQRS (both have Kafka as central DB)
+   - JSON/Protobuf on wire. Parquet for S3. Parquet is column oriented. so gives rigidity
+   - No rename of data fields is the
+   - downstream people pains (data teams) cannot be heard (app team)
+   - DB is an implementation detail
+** AWS
+   - spot instances
+   - Kafka - 280 nodes, 15 clusters
+   - Aerospike - 220 nodes, 17 clusters
+   - Apache Spark - 2600 nodes, 18 clusters
+   - Amazon S3 - 12 PB
+** Books
+   - Release It! - Michael T Nygard
+   - 
+
+
+
+* -----
+* 2019
+* -----
+* Strangeloop 2019  
+  https://www.youtube.com/watch?v=g1ib43q3uXQ&list=PLcGKfGEEONaCToXJZ4Uk1NVW70U3C-Im-
+* AdZerk : Meander - Declarative Explorations at the Limits of FP
+  https://www.youtube.com/watch?v=9fhnJpCgtUw
+  https://github.com/noprompt/meander
+  
+  Data Transformations DSL
+
+** Clean pipeline
+#+begin_src clojure
+(->> coll
+     (map step1)
+     (mapcat step2)
+     (partition 2)
+     (filter foo?)
+     (map (partial extended-bar bar)
+     (replace-foo-bar))
+#+end_src
+Is it clear?
+** The Plan
+   - Meander and philosphy
+   - Approach
+   - Future
+** Example
+Pattern matching on steroids   
+
+#+begin_src clojure
+(m/match person
+{}
+#+end_src
+** (m/search) with (m/scan) and memory variables like ?name 
+   #+begin_src clojure
+   (m/search game-info
+     {:
+   #+end_src
+** (m/match) with (m/gather) and (m/sust)
+** Ton of operators
+** Recursive data structures with (m/with)
+   function combinators?
+   recursive pattern matching
+#+begin_src clojure
+(m/with)
+#+end_src
+** SLOW?
+   slower than hand written clojure
+   will get faster
+** Under the hood ; pattern matching
+   - parser
+   - Expander
+   - IR
+   - Second IR
+   - Dead code elimination
+   - Optimizations
+   - Type inference
+   - Code generation
+ 
+  As always error messaging sucks with such endeavors
+** Future
+   - better error
+** Data Oriented Programming
+#+begin_src clojure
+(fn [] "")
+#+end_src
+ - Runtime execution as data?  I can extract what I need
+** Programming by example
+   infer functional code
+   infer declarative code?
+   
+* How to teach programming?
+https://www.youtube.com/watch?v=g1ib43q3uXQ&list=PLcGKfGEEONaCToXJZ4Uk1NVW70U3C-Im-
+
+Dutch Teacher experience in Netherlands
+
+
+Everyone should learn programming. Even those who don't want to become Software Engineers - Every programmer including bill gates, mark zuck, alan kay etc. 
+Excel is the best programming language. Everybody in every industry is doing this
+- Spreadsheets are code
+- Turing complete
+
+What is programming?
+ - Writing programs to make machine do work?
+ - validation of problem solving?
+
+** How to teach kids?
+   - Programmers only learn from making mistakes
+   - You will fail often, and it will be frustrating.
+   - Learning is frustrationdf
+   - Break the rules
+   - Computer coding for kids book
+   - Code clubs ;
+   - Doesn't know anything about programming
+   - They tell when they hate the learning
+** How to teach?
+   - The oxford handbook of reading
+     Sound matters
+   - We lack fights
+     Phonics vs Whole language approach ; pedagogy styles
+   - THe math wars
+     - Explanation vs exploration
+   - What about programming?
+     - LOGO is the first 
+       - By explaining something you take away the opportunity for a child to discover it.
+       - Does it work.  Give a tennis racket. and ask them to figure out?
+       - practice tiny things
+** How to teach other things
+   - Minimal explanation
+   - The use of worked examples for problem solving 
+   - Short term memory
+     4+/-2 items
+   - Once short term is full, cognitive load is too high.
+   - You don't become an expert by doing expert things
+** How does code sound?
+   - kids who read the syntax were doing better with better comprehension
+** Summary
+* NuBank : Empowering people to build a digital bank   
+  A brazilian bank built on clojure
+https://www.youtube.com/watch?v=YWKTV1R5nU4&list=PLcGKfGEEONaCToXJZ4Uk1NVW70U3C-Im-&index=75
+** Platform
+   Credit card
+** What we do?
+   We provide infrastructure as a Service to the Engineering team
+   We foster the spread SRE culture
+   Declarative way to define infrastructgure
+   Alterts for certain environments and workloads
+** Let a thousand flowers bloom
+   microservices
+   pipelines
+   Homogenous codebase - Clojure
+   ADRs  - Architectural Decision Reports
+   Common libraries
+   
+** Observability culture
+   - Grafana
+
+** Common libraries
+   #+begin_src clojure
+   :dependencies [[org.clojure/clojre "1.10.0"]
+                  [common-core "12.17.0]
+                  [common-crypto "1.1.1"]
+                  [common-db ""]
+                  [common-finagle ""]
+                  [common-http-client ""]
+                  [common-io ""]
+                  [common-kafka ""]
+                  [common-metrics ""] ;; prometheus support
+                  [common-repl ""]
+                  [common-schemata ""]]
+                  
+   #+end_src
+** crash   
+   Crash slack channel
+   - post-mortem culture.  The cost of failure is education
+   - Incidence 
+     - timeline
+     - rca
+     - business impact
+** Morgue repository
+** Global shard
+   shards are meant to be independent of each other
+   horizontal scalability
+   canary at easy
+** Not a bed of roses
+   - Operational burden
+   - Pressure point
+   - NO way to move customers across shards
+** Engineering tools
+   - Kubernetes
+   - NuCLI 
+     - awscli
+     - kubectl
+   - Nimbus
+     - Monorepo for infrastructure components
+     - use clojure to provision infrastructure
+     - 
+
+
+
