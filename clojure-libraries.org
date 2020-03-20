@@ -1,0 +1,66 @@
+
+* Kafka client
+https://github.com/FundingCircle/jackdaw
+* GraphQL Server & Client
+https://github.com/walmartlabs/lacinia-pedestal
+https://github.com/walmartlabs/lacinia
+* Dependency Injection
+** Component
+** Mount
+** Integrant
+https://github.com/weavejester/integrant
+* Full stack Web application framework
+** Luminusweb
+   Genrates an opinionated simple stack assembled out of libraries
+** Pedestal
+** Hoplon
+** Fulcro
+   http://cryogenweb.org/
+** Kafka-graphql-examples
+   https://github.com/openweb-nl/kafka-graphql-examples
+* SPA
+** Re-frame
+** Reagent
+** Hiccup
+** ClojureScript
+
+* Libraries
+** Hiccup
+** Ring
+** Reitit
+** toucan
+   Define application models
+   https://github.com/metabase/toucan
+** caribou
+** HoneySQL vs. SQLKorma
+   Datastructures as DSL - HoneySQL (in-fashion)
+   Macros for DSL - SQLKorma (out-of-fashion)
+** clojure.java.jdbc vs next.jdbc
+   https://github.com/clojure/java.jdbc - gone
+   https://github.com/seancorfield/next-jdbc - in
+* Applications
+** Lipas https://github.com/lipas-liikuntapaikat/lipas
+** Pepa
+** Edge
+   https://github.com/juxt/edge
+** DoneJS
+   https://donejs.com/index.html
+** Metabase
+   A opensource BI Server application
+   https://github.com/metabase/metabase
+** Cryogen
+   A static website genrator.. You wanna create blog by generating all the content as static html?
+   http://cryogenweb.org/
+* Cloud
+** AWS API
+   https://github.com/cognitect-labs/aws-api
+** Amazon Dynamo client
+   https://github.com/Taoensso/faraday
+
+   
+* Clojurists
+- https://aphyr.com/posts/319-clojure-from-the-ground-up-debugging
+- https://www.braveclojure.com/
+- https://clojurecademy.com/
+- 
+

@@ -348,6 +348,7 @@ What is programming?
 * NuBank : Empowering people to build a digital bank   
   A brazilian bank built on clojure
 https://www.youtube.com/watch?v=YWKTV1R5nU4&list=PLcGKfGEEONaCToXJZ4Uk1NVW70U3C-Im-&index=75
+https://github.com/nubank
 ** Platform
    Credit card
 ** What we do?

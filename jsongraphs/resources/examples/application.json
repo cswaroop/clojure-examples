@@ -1,0 +1,12 @@
+{
+    "graph": {
+        "id": "",
+        "type": "loan-application",
+        "label": "GB001",
+        "nodes": {"GB001": {"metadata": {"group": 1},
+                            "label": "GB001"}
+        },
+        "edges": [],
+        "metadata": {}
+    }
+}

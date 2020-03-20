@@ -1,0 +1,78 @@
+Clojure is lisp dialect meant to be practically useful.  Sure Haskell is being useful.  Lisps have always been useful in domains that are heavy cognitive.
+
+https://clojuredocs.org/clojure.core
+
+
+Writing this in the http://www.ulisp.com/show?3L#cxxxr style
+** Summary
+*** Symbols
+*** Reader macros
+*** Defining variables and functions
+*** Arithmetic functions
+
+    *, *', +, +', -, -', /, quot, rem, mod, inc, dec, max, min, with-precision, numerator, denominator, rand rand-int
+*** Arithmetic comparisions
+    =, ==, not=, <, > <=, >=
+*** Bitwise operations
+    bit-and, bit-or, bit-xor, bit-not, bit-and-not, bit-clear, bit-set, bit-shift-left, bit-shift-right, bit-test
+*** Cast operators (coerce)
+    byte, short, int, long float, double, bigint, bigdec, num, rationalize, boolean, char
+*** Symbols/Keywords
+    keyword, symbol, name, intern, namespace
+*** Collections    
+**** Lists
+**** Vectors
+**** Maps
+**** Sets
+**** Sequences
+     CREATION
+     seq, sequence, eduction
+     range, lazy-seq, lazy-cat, repeat, iterate, cycle, interleave, interpose, tree-seq, resultset-seq
+     xml-seq, enumeration-seq, iterator-seq, file-seq, line-seq,
+     repeatedly
+     USAGE
+     first, second, last, rest, next, ffirst, nfirst, nth, nnext, nthnext, nthrest, rand-nth, butlast, take, take-last, take-nth, take-while, drop, drop-last, drop-while
+     MODIFICATION
+     conj, concat, distinct, group-by, partition, partition-all, partition-by, split-at, split-with, filter, filterv, remove, replace, shuffle, random-sample, flatten, sort, sort-by, reverse, dedupe
+     ITERATION
+     for, doseq, map, mapv, map-indexed mapcat, reductions, transduce, max-key, min-key doall dorun
+*** Conditionals, Flow control
+    and, or, not
+    let
+    if, if-not, if-some, when, when-not, when-let, when-first, when-some, cond, condp, cond->, cond->> some->, some->>
+    ->, ->>, as->
+    do
+    eval
+    loop, recur
+    trampoline
+    while
+    try, catch, throw, finally, assert
+    repeatedly, iterate
+    dotimes, doseq, for
+    delay, delay?, deref, force
+    lazy-seq, lazy-cat, doall, dorun
+
+*** Tests
+    identical?, zero?, pos?, neg?, even?, odd?, number?, ratio?, rational?, integer?, int?, pos-int?, nat-int?, decimal?, bigdec?, float?, double?, nil?, true?, false?, keyword?, symbol?, ident?, simple-keyword?, simple-symbol?, simple-ident?, qualified-keyword?, qualified-symbol?, qualified-ident? , char?, string?
+    type, class, bases, supers
+    extends?, satisfies? class? instance?, isa? cast
+*** Characters
+    char, char?, string?
+*** Strings
+    str, print-str, println-str, pr-str, prn-str, with-out-str
+*** Regular Expressions
+    '#, re-pattern, re-matcher, re-find, re-matches, re-seq, re-groups
+*** Iteration and mapping
+    ->, ->>, as->
+*** In-place operations
+*** System functions
+*** Input/Output
+    *1, *2, *3, *e, *err*, *file*, *in*, *out*, *ns*, *source-path*, *agent*, *read-eval*, *warn-on-reflection*
+*** User Defined Types (UDT)
+    defprotocol, deftype
+    extend-protocol, extend-type, extend, extenders
+    reify
+*** Metadata
+    meta, with-meta, vary-meta, reset-meta!, alter-meta!
+    
+
